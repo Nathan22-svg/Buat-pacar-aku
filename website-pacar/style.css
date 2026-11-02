@@ -1,0 +1,147 @@
+/* Custom CSS Styles & Animations */
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF5F7;
+}
+::-webkit-scrollbar-thumb {
+  background: #F472B6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #EC4899;
+}
+
+/* Music disc rotation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinning {
+  animation: spin 4s linear infinite;
+}
+
+/* Polaroid Card Effect */
+.polaroid-card {
+  background: white;
+  padding: 12px 12px 20px 12px;
+  box-shadow: 0 10px 25px -5px rgba(244, 114, 182, 0.2), 0 8px 10px -6px rgba(244, 114, 182, 0.1);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.polaroid-card:hover {
+  transform: translateY(-6px) rotate(1deg);
+  box-shadow: 0 20px 30px -10px rgba(244, 114, 182, 0.35);
+}
+
+/* Envelope Interactive Animation */
+.envelope-box {
+  width: 280px;
+  height: 180px;
+  position: relative;
+  perspective: 800px;
+}
+
+.envelope {
+  width: 100%;
+  height: 100%;
+  background: #FBCFE8; /* Tailwind pink-200 */
+  border-radius: 0 0 12px 12px;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(244, 114, 182, 0.25);
+  transition: all 0.5s ease;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-top: 100px solid #F472B6; /* Tailwind pink-400 */
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+}
+
+.envelope-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 140px solid #F9A8D4; /* Tailwind pink-300 */
+  border-right: 140px solid #F9A8D4;
+  border-bottom: 90px solid #F472B6;
+  border-radius: 0 0 12px 12px;
+  z-index: 4;
+}
+
+.envelope-stamp {
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  background: #E11D48; /* Rose 600 */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(225, 29, 72, 0.4);
+  z-index: 6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.envelope-paper {
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  width: 244px;
+  height: 145px;
+  background: #FFFDF9;
+  border-radius: 8px;
+  z-index: 3;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px dashed #F472B6;
+}
+
+/* When Envelope is Opened */
+.envelope-box.opened .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-box.opened .envelope-paper {
+  transform: translateY(-80px);
+}
+
+.envelope-box.opened .envelope-stamp {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}

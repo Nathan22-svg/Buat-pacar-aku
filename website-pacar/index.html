@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special for My Favorite Person 💖</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Canvas Confetti for celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Dancing Script / Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#FFF5F7] text-[#4A3E3D] font-['Plus_Jakarta_Sans',sans-serif] selection:bg-pink-300 selection:text-pink-900 overflow-x-hidden relative">
+
+  <!-- Background Floating Hearts Canvas -->
+  <canvas id="heartCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Floating Music Player Widget -->
+  <div class="fixed top-5 right-5 z-50 flex items-center gap-3 bg-white/80 backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg border border-pink-100 transition-all hover:shadow-pink-200/50">
+    <div class="flex items-center gap-2">
+      <div id="musicDisc" class="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-400 to-rose-400 flex items-center justify-center text-white shadow-inner">
+        <i data-lucide="music" class="w-4 h-4"></i>
+      </div>
+      <div class="hidden sm:block text-left">
+        <p id="musicLabel" class="text-xs font-semibold text-pink-700 truncate max-w-[120px]">Play Music</p>
+        <span class="text-[10px] text-gray-500 block">Lofi Love 🎶</span>
+      </div>
+    </div>
+    <button id="musicToggleBtn" class="w-8 h-8 rounded-full bg-pink-100 hover:bg-pink-200 text-pink-600 flex items-center justify-center transition" title="Putar / Hentikan Musik">
+      <i data-lucide="play" id="musicIcon" class="w-4 h-4 ml-0.5"></i>
+    </button>
+  </div>
+  <audio id="bgMusic" loop preload="auto"></audio>
+
+  <!-- Navigation Bar -->
+  <nav class="sticky top-0 z-40 bg-white/60 backdrop-blur-md border-b border-pink-100/60 py-3.5 px-6">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="#hero" class="font-['Dancing_Script',cursive] text-2xl font-bold text-pink-600 flex items-center gap-2 hover:scale-105 transition">
+        <span>Forever With You</span>
+        <span class="text-rose-500 animate-pulse">❤️</span>
+      </a>
+      <div class="flex items-center space-x-4 sm:space-x-8 text-xs sm:text-sm font-medium text-pink-900/80">
+        <a href="#counter" class="hover:text-pink-600 transition">Hari Kita</a>
+        <a href="#timeline" class="hover:text-pink-600 transition">Kenangan</a>
+        <a href="#reasons" class="hover:text-pink-600 transition">Alasan</a>
+        <a href="#letter" class="hover:text-pink-600 transition">Surat</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="hero" class="relative z-10 pt-16 pb-20 px-4 sm:px-6 text-center max-w-4xl mx-auto flex flex-col items-center">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100/80 border border-pink-200 text-pink-700 text-xs sm:text-sm font-medium mb-6 animate-bounce">
+      <span>✨ Spesial Untukmu</span>
+      <span id="badgeName" class="font-bold">Sayang</span>
+      <span>✨</span>
+    </div>
+
+    <h1 class="font-['Playfair_Display',serif] text-4xl sm:text-6xl font-bold text-pink-950 leading-tight mb-4">
+      Kamu Adalah Hal Terindah <br class="hidden sm:inline"/>
+      <span class="font-['Dancing_Script',cursive] text-pink-500 text-5xl sm:text-7xl block sm:inline mt-2">Dalam Hidupku</span>
+    </h1>
+
+    <p id="heroSubtitle" class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-8 font-light">
+      Website kecil ini dibuat khusus dari hati yang terdalam, cuma untuk kamu yang paling istimewa.
+    </p>
+
+    <!-- Quick Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#counter" class="px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 text-white font-medium shadow-md shadow-pink-300/50 hover:shadow-lg hover:shadow-pink-400/50 hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+        <i data-lucide="clock" class="w-4 h-4"></i>
+        <span>Hitungan Hari Kita</span>
+      </a>
+      <a href="#letter" class="px-6 py-3 rounded-full bg-white text-pink-600 font-medium border border-pink-200 shadow-sm hover:bg-pink-50 hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+        <i data-lucide="mail-heart" class="w-4 h-4"></i>
+        <span>Buka Surat Cinta</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- SECTION: COUNTER HARI JADIAN -->
+  <section id="counter" class="relative z-10 py-16 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto bg-gradient-to-br from-white/95 to-pink-50/80 backdrop-blur-xl rounded-3xl p-8 sm:p-12 shadow-xl border border-pink-100/80 text-center">
+      
+      <div class="w-16 h-16 rounded-full bg-pink-100 text-pink-500 flex items-center justify-center mx-auto mb-4 shadow-inner">
+        <i data-lucide="heart-handshake" class="w-8 h-8"></i>
+      </div>
+
+      <h2 class="font-['Playfair_Display',serif] text-2xl sm:text-3xl font-bold text-pink-900 mb-2">
+        Kita Sudah Melewati Bersama
+      </h2>
+      <p class="text-xs sm:text-sm text-pink-600 mb-8 font-medium">
+        Sejak <span id="anniversaryFormatted" class="font-bold underline decoration-pink-300">14 Februari 2024</span> hingga detik ini
+      </p>
+
+      <!-- Counter Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-pink-100 flex flex-col items-center">
+          <span id="counterDays" class="text-3xl sm:text-5xl font-extrabold text-pink-600 font-['Plus_Jakarta_Sans']">0</span>
+          <span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-500 mt-1">Hari</span>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-pink-100 flex flex-col items-center">
+          <span id="counterHours" class="text-3xl sm:text-5xl font-extrabold text-pink-500 font-['Plus_Jakarta_Sans']">0</span>
+          <span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-500 mt-1">Jam</span>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-pink-100 flex flex-col items-center">
+          <span id="counterMinutes" class="text-3xl sm:text-5xl font-extrabold text-pink-500 font-['Plus_Jakarta_Sans']">0</span>
+          <span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-500 mt-1">Menit</span>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-pink-100 flex flex-col items-center">
+          <span id="counterSeconds" class="text-3xl sm:text-5xl font-extrabold text-rose-500 font-['Plus_Jakarta_Sans']">0</span>
+          <span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-500 mt-1">Detik</span>
+        </div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-gray-500 italic mt-8 max-w-lg mx-auto">
+        "Setiap detiknya berharga, dan setiap harinya aku semakin jatuh cinta sama kamu."
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION: TIMELINE PERJALANAN / KENANGAN -->
+  <section id="timeline" class="relative z-10 py-16 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="text-xs sm:text-sm font-bold uppercase tracking-widest text-pink-500">Kisah Kita</span>
+        <h2 class="font-['Playfair_Display',serif] text-3xl sm:text-4xl font-bold text-pink-950 mt-1">
+          Langkah & Kenangan Indah
+        </h2>
+        <div class="w-16 h-1 bg-pink-300 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <!-- Container Timeline Items (Generated via JavaScript) -->
+      <div id="timelineContainer" class="relative border-l-2 border-pink-200 ml-4 sm:ml-32 space-y-12">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: REASONS WHY I LOVE YOU -->
+  <section id="reasons" class="relative z-10 py-16 px-4 sm:px-6 bg-pink-50/60 border-y border-pink-100">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-xs sm:text-sm font-bold uppercase tracking-widest text-pink-500">Dari Lubuk Hati</span>
+        <h2 class="font-['Playfair_Display',serif] text-3xl sm:text-4xl font-bold text-pink-950 mt-1">
+          Alasan Kenapa Aku Begitu Sayang Kamu
+        </h2>
+        <p class="text-sm text-gray-500 mt-2">Sebenarnya ada ribuan alasan, tapi ini beberapa yang selalu bikin hatiku hangat:</p>
+      </div>
+
+      <!-- Cards Grid -->
+      <div id="reasonsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: SURAT CINTA INTERAKTIF (ENVELOPE) -->
+  <section id="letter" class="relative z-10 py-20 px-4 sm:px-6 text-center">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-xs sm:text-sm font-bold uppercase tracking-widest text-pink-500">Pesan Khusus</span>
+        <h2 class="font-['Playfair_Display',serif] text-3xl sm:text-4xl font-bold text-pink-950 mt-1">
+          Surat Cinta Untukmu
+        </h2>
+        <p class="text-sm text-gray-500 mt-2">Klik amplop di bawah ini untuk membuka dan membaca isi suratnya ✨</p>
+      </div>
+
+      <!-- Interactive Envelope Component -->
+      <div class="flex justify-center my-6">
+        <div id="envelopeWrapper" class="envelope-box cursor-pointer select-none">
+          <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-paper shadow-md">
+              <div class="flex items-center justify-center h-full">
+                <span class="font-['Dancing_Script',cursive] text-2xl text-pink-600 font-bold">A Special Letter ❤️</span>
+              </div>
+            </div>
+            <div class="envelope-front"></div>
+            <div class="envelope-stamp">
+              <i data-lucide="heart" class="w-6 h-6 text-white fill-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unfolded Letter Modal / Paper Card (Shown when opened) -->
+      <div id="letterModal" class="hidden transition-all duration-500 max-w-xl mx-auto bg-[#FFFDF9] border border-amber-100 rounded-3xl p-8 sm:p-10 shadow-2xl relative text-left mt-8 font-['Plus_Jakarta_Sans']">
+        <div class="absolute -top-4 right-8 transform rotate-6 bg-pink-100 text-pink-700 text-xs px-3 py-1 rounded-full font-semibold border border-pink-200">
+          💌 With Endless Love
+        </div>
+        
+        <h3 id="letterGreeting" class="font-['Dancing_Script',cursive] text-3xl sm:text-4xl text-pink-600 font-bold mb-6">
+          Untuk Sayangku,
+        </h3>
+
+        <div id="letterBody" class="space-y-4 text-gray-700 text-sm sm:text-base leading-relaxed font-light">
+          <!-- Paragraphs injected dynamically -->
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-pink-100 text-right">
+          <p id="letterClosing" class="text-xs uppercase tracking-widest text-pink-500 font-semibold">Dengan segenap cinta,</p>
+          <p id="letterSignature" class="font-['Caveat',cursive] text-2xl sm:text-3xl text-pink-700 font-bold mt-1">Dari Aku</p>
+        </div>
+
+        <div class="mt-6 text-center">
+          <button id="confettiRepeatBtn" class="px-5 py-2 rounded-full bg-pink-100 hover:bg-pink-200 text-pink-700 text-xs font-semibold inline-flex items-center gap-1.5 transition">
+            <span>Sebar Hati Lagi!</span>
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: PLAYFUL QUESTION "ALWAYS BE MINE?" -->
+  <section class="relative z-10 py-16 px-4 sm:px-6">
+    <div class="max-w-xl mx-auto bg-white/90 backdrop-blur-md rounded-3xl p-8 sm:p-10 text-center shadow-lg border border-pink-200/70">
+      <div class="text-4xl mb-3">🥺👉👈</div>
+      <h3 class="font-['Playfair_Display',serif] text-2xl sm:text-3xl font-bold text-pink-900 mb-2">
+        Mau terus sama aku selamanya?
+      </h3>
+      <p class="text-xs sm:text-sm text-gray-500 mb-8">
+        Pertanyaan sederhana, tapi jawabannya berarti segalanya buat aku.
+      </p>
+
+      <div class="relative h-24 flex items-center justify-center gap-4">
+        <button id="yesBtn" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold text-base shadow-lg shadow-pink-300 hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+          <span>Iya Dong! ❤️</span>
+        </button>
+        <button id="noBtn" class="px-6 py-3 rounded-full bg-gray-100 text-gray-600 font-medium text-sm transition-all duration-150 absolute right-10 sm:right-20">
+          Nggak
+        </button>
+      </div>
+
+      <div id="responseMessage" class="hidden mt-6 p-4 rounded-2xl bg-pink-50 border border-pink-200 text-pink-700 font-semibold text-sm animate-fade-in">
+        Yaaay! Kamu sudah klik iya, janji ya nggak boleh nyesel! Aku sayang banget sama kamu! 🥰🎉
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative z-10 py-8 text-center text-xs text-gray-400">
+    <p>Dibuat dengan segenap rasa cinta & rindu ❤️</p>
+    <p class="mt-1 font-['Dancing_Script',cursive] text-lg text-pink-500 font-bold" id="footerNames">You & Me</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
